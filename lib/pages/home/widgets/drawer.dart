@@ -9,24 +9,24 @@ class CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Text('Drawer Header'),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
+      child: SafeArea(
+        child: Container(
+          margin: EdgeInsets.only(top: 20, left: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed('/login'),
+                child: Container(
+                  child: Text(
+                    'Авторизация',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+            ],
           ),
-          ListTile(
-            title: Text('Item 1'),
-            onTap: () {},
-          ),
-          ListTile(
-            title: Text('Item 2'),
-            onTap: () {},
-          ),
-        ],
+        ),
       ),
     );
   }
