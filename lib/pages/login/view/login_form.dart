@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../login.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -6,11 +9,79 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  TextEditingController _emailController, _passwordController;
+  LoginCubit _loginCubit;
+  @override
+  void initState() {
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _loginCubit = BlocProvider.of<LoginCubit>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text('Hello from Login Page'),
+    return BlocConsumer<LoginCubit, LoginState>(
+      cubit: _loginCubit,
+      listener: (BuildContext context, LoginState state) async {
+        if (state is LoginLoading) _showSnackBar(state.message, showProgress: true);
+        if (state is LoginSuccess) {
+          _showSnackBar('Авторизация прошла успешно!');
+          await Future.delayed(Duration(seconds: 3));
+          Navigator.pop(context);
+        }
+        if (state is LoginFailed) _showSnackBar('Ошибка авторизации');
+      },
+      builder: (context, state) {
+        return Container(
+          margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(labelText: 'E-mail', hintText: 'example@mail.com'),
+              ),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(labelText: 'Пароль'),
+                obscureText: true,
+              ),
+              SizedBox(height: 20),
+              RaisedButton(
+                onPressed: () => _loginCubit
+                    .logIn({'email': _emailController.text, 'password': _passwordController.text}),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                color: Theme.of(context).primaryColor,
+                child: Text(
+                  'Подтвердить',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              SizedBox(height: 5),
+              FlatButton(
+                onPressed: () {},
+                child: Text(
+                  'Регистрация',
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
+  }
+
+  _showSnackBar(String text, {bool showProgress = false}) {
+    final snackBar = SnackBar(
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(text),
+          if (showProgress) CircularProgressIndicator(),
+        ],
+      ),
+      backgroundColor: Colors.grey,
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 }

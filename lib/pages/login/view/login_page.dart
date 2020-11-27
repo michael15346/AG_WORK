@@ -1,5 +1,8 @@
-import 'package:ag_work/pages/login/view/login_form.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../login.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,8 +13,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: LoginForm(),
+      appBar: AppBar(title: Text('Авторизация')),
+      body: BlocProvider(
+        create: (context) => LoginCubit(),
+        child: LoginForm(),
+      ),
     );
   }
 }
