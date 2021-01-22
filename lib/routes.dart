@@ -1,16 +1,18 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
-import 'pages/login/view/login_page.dart';
+import 'pages/home/home.dart';
+import 'pages/login/login.dart';
 
 class RouteGenerator {
-  static Route<dynamic> generateRoute(RouteSettings setting) {
-    final args = setting.arguments;
-    switch (setting.name) {
-      case '/login':
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    final args = settings.arguments;
+    switch (settings.name) {
+      case HomePage.routeName:
+        return MaterialPageRoute(builder: (context) => HomePage());
+      case LoginPage.routeName:
         return MaterialPageRoute(builder: (context) => LoginPage());
       default:
-        debugPrint('Error in routing');
+        debugPrint('Something wrong with route');
     }
   }
 }

@@ -9,11 +9,6 @@ class LoginInitial extends LoginState {}
 
 class LoginSuccess extends LoginState {}
 
-class LoginLoading extends LoginState {
-  final String message;
-  LoginLoading({this.message});
-  @override
-  List<Object> get props => [message];
-}
+class LoginLoading extends LoginState {}
 
 class LoginFailed extends LoginState {}

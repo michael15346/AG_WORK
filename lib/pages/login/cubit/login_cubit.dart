@@ -7,7 +7,8 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
   Future<void> logIn(Map<String, dynamic> data) async {
-    emit(LoginLoading(message: 'Авторизация...'));
+    print(data);
+    emit(LoginLoading());
     try {
       await Future.delayed(Duration(seconds: 3));
       emit(LoginSuccess());

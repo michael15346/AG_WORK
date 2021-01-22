@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'theme.dart';
 import 'routes.dart';
-import 'pages/home/home.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(App());
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      title: 'Mobile App',
+      theme: appTheme,
+      initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
-      home: HomePage(),
     );
   }
 }

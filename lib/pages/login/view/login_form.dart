@@ -11,20 +11,26 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   TextEditingController _emailController, _passwordController;
   LoginCubit _loginCubit;
+
   @override
   void initState() {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    _loginCubit = BlocProvider.of<LoginCubit>(context);
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _loginCubit = BlocProvider.of<LoginCubit>(context);
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
       cubit: _loginCubit,
-      listener: (BuildContext context, LoginState state) async {
-        if (state is LoginLoading) _showSnackBar(state.message, showProgress: true);
+      listener: (context, state) async {
+        if (state is LoginLoading) _showSnackBar('Авторизация...', showProgress: true);
         if (state is LoginSuccess) {
           _showSnackBar('Авторизация прошла успешно!');
           await Future.delayed(Duration(seconds: 3));
@@ -34,7 +40,7 @@ class _LoginFormState extends State<LoginForm> {
       },
       builder: (context, state) {
         return Container(
-          margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+          margin: EdgeInsets.only(left: 20, top: 20, right: 20),
           child: Column(
             children: [
               TextFormField(
@@ -42,16 +48,16 @@ class _LoginFormState extends State<LoginForm> {
                 decoration: InputDecoration(labelText: 'E-mail', hintText: 'example@mail.com'),
               ),
               TextFormField(
+                obscureText: true,
                 controller: _passwordController,
                 decoration: InputDecoration(labelText: 'Пароль'),
-                obscureText: true,
               ),
               SizedBox(height: 20),
               RaisedButton(
-                onPressed: () => _loginCubit
-                    .logIn({'email': _emailController.text, 'password': _passwordController.text}),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                onPressed: () => _loginCubit.logIn(
+                    {'email': _emailController?.text, 'password': _passwordController?.text}),
                 color: Theme.of(context).primaryColor,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                 child: Text(
                   'Подтвердить',
                   style: TextStyle(color: Colors.white),
@@ -60,9 +66,7 @@ class _LoginFormState extends State<LoginForm> {
               SizedBox(height: 5),
               FlatButton(
                 onPressed: () {},
-                child: Text(
-                  'Регистрация',
-                ),
+                child: Text('Регистрация'),
               ),
             ],
           ),
@@ -82,6 +86,7 @@ class _LoginFormState extends State<LoginForm> {
       ),
       backgroundColor: Colors.grey,
     );
+
     Scaffold.of(context).showSnackBar(snackBar);
   }
 }
