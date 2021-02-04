@@ -5,11 +5,9 @@ import '../login.dart';
 
 class LoginPage extends StatelessWidget {
   static const routeName = '/login';
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Авторизация')),
+      appBar: AppBar(title: Text("Авторизация")),
       body: BlocProvider(
         create: (context) => LoginCubit(),
         child: LoginForm(),

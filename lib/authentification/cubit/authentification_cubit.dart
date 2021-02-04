@@ -1,15 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../models/user/user.dart';
 import '../repository/user_repository.dart';
-
+import '../../models/user/user.dart';
 part 'authentification_state.dart';
 
 class AuthentificationCubit extends Cubit<AuthentificationStatus> {
   final UserRepository userRepository;
-
-  AuthentificationCubit(this.userRepository) : super(AuthentificationStatus.unknown);
-
+  AuthentificationCubit({this.userRepository})
+      : super(AuthentificationStatus.unknown);
   Future<void> appStarted() async {
     try {
       final hasInfo = await userRepository.hasInfo();

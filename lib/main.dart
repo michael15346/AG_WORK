@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import "routes.dart";
+//import 'pages/home/home.dart';
 import 'theme.dart';
-import 'routes.dart';
 
-void main() => runApp(App());
+void main() {
+  runApp(App());
+}
 
 class App extends StatelessWidget {
   @override
@@ -13,6 +16,21 @@ class App extends StatelessWidget {
       theme: appTheme,
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
+      //home: MyHomePage(),
     );
   }
 }
+/*
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController controller = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return HomePage();
+  }
+}
+*/

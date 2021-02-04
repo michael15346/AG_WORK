@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 part 'user.g.dart';
 
 @JsonSerializable()
@@ -10,25 +9,11 @@ class User {
   final String name;
   final String email;
   final String token;
-
-  const User({
-    this.id,
-    this.role,
-    this.name,
-    this.email,
-    this.token,
-  });
-
+  const User({this.id, this.role, this.name, this.email, this.token});
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
-
-  User copyWith({
-    String id,
-    String role,
-    String name,
-    String email,
-    String token,
-  }) =>
+  User copyWith(
+          {String id, String role, String name, String email, String token}) =>
       User(
         id: id ?? this.id,
         role: role ?? this.role,
@@ -36,15 +21,12 @@ class User {
         email: email ?? this.email,
         token: token ?? this.token,
       );
-
   @override
-  String toString() {
-    return '''
-    id: $id,
-    role: $role,
-    name: $name,
-    email: $email,
-    token: $token,
-    ''';
-  }
+  String toString() => '''
+  id: $id,
+  role: $role,
+  name: $name,
+  email: $email,
+  token: $token,
+  ''';
 }

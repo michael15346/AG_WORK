@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class CustomButton extends StatelessWidget {
   final IconData icon;
   final Function onTap;
-  CustomButton({@required this.icon, @required this.onTap});
+  CustomButton({this.icon, this.onTap})
+      : assert(icon != null, "Please include icon data");
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +18,10 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           boxShadow: [
             BoxShadow(
-              blurRadius: 1,
-              spreadRadius: 1,
-              offset: Offset(0, 2),
               color: Theme.of(context).shadowColor,
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: Offset(0, 2),
             ),
           ],
         ),

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-
+import "package:flutter/material.dart";
+import "pages/login/view/login_page.dart";
 import 'pages/home/home.dart';
-import 'pages/login/login.dart';
+import 'pages/registration/view/registration_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -11,8 +11,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => HomePage());
       case LoginPage.routeName:
         return MaterialPageRoute(builder: (context) => LoginPage());
+      case RegistrationPage.routeName:
+        return MaterialPageRoute(builder: (context) => RegistrationPage());
       default:
-        debugPrint('Something wrong with route');
+        debugPrint("No route");
+        return null;
     }
   }
 }
