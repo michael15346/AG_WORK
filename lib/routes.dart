@@ -4,8 +4,8 @@ import 'pages/home/home.dart';
 import 'pages/registration/view/registration_page.dart';
 
 class RouteGenerator {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+  static Route<dynamic>? generateRoute(RouteSettings settings) {
+    //final args = settings.arguments;
     switch (settings.name) {
       case HomePage.routeName:
         return MaterialPageRoute(builder: (context) => HomePage());

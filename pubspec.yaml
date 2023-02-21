@@ -1,24 +1,24 @@
-name: ag_work
+name: agwork
 description: Mobile app for AG course.
 version: 1.0.0+1
 
 environment:
-    sdk: ">=2.7.0 <3.0.0"
+    sdk: ">=2.19.2"
 
 dependencies:
     flutter:
         sdk: flutter
 
-    flutter_map: ^0.10.1+1
+    flutter_map: ^3.1.0
     cupertino_icons: ^1.0.0
 
-    equatable: ^1.2.5
-    flutter_bloc: ^6.1.1
+    equatable: ^2.0.5
+    flutter_bloc: ^8.1.2
 
-    build_runner: ^1.11.0
-    json_serializable: ^3.5.1
+    build_runner: ^2.3.3
+    json_serializable: ^6.6.1
 
-    shared_preferences: ^0.5.12+4
+    shared_preferences: ^2.0.17
 
 dev_dependencies:
     flutter_test:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 import '../../../data/sampledata.dart';
 import '../home.dart';
 import '../../login/login.dart';
@@ -17,7 +17,8 @@ class _HomeFormState extends State<HomeForm> {
   void initState() {
     super.initState();
     stations.forEach((station) {
-      Map<String, dynamic> location = station['location'];
+      Map<String, dynamic> location =
+          station['location'] as Map<String, dynamic>;
       _markers.add(Marker(
           point: LatLng(location['coordinates'][0], location['coordinates'][1]),
           builder: (ctx) =>
@@ -43,19 +44,18 @@ class _HomeFormState extends State<HomeForm> {
 
   Widget _buildMap() {
     return FlutterMap(
-      options: MapOptions(
-        center: LatLng(59.960938, 30.351599),
-        zoom: 8.0,
-      ),
-      layers: [
-        TileLayerOptions(
-          urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-          subdomains: ['a', 'b', 'c'],
+        options: MapOptions(
+          center: LatLng(59.960938, 30.351599),
+          zoom: 8.0,
         ),
-        MarkerLayerOptions(
-          markers: _markers,
-        ),
-      ],
-    );
+        children: [
+          TileLayer(
+            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            subdomains: ['a', 'b', 'c'],
+          ),
+          MarkerLayer(
+            markers: _markers,
+          )
+        ]);
   }
 }

@@ -1,4 +1,4 @@
-package com.example.ag_work
+package com.example.fluttertest
 
 import io.flutter.embedding.android.FlutterActivity
 

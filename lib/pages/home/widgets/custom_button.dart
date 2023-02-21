@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 
 class CustomButton extends StatelessWidget {
-  final IconData icon;
-  final Function onTap;
+  final IconData? icon;
+  final void Function()? onTap;
   CustomButton({this.icon, this.onTap})
       : assert(icon != null, "Please include icon data");
 
@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
         width: 45,
         height: 45,
         decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           boxShadow: [
             BoxShadow(

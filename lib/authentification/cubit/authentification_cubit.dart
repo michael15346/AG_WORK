@@ -4,33 +4,33 @@ import '../../models/user/user.dart';
 part 'authentification_state.dart';
 
 class AuthentificationCubit extends Cubit<AuthentificationStatus> {
-  final UserRepository userRepository;
+  final UserRepository? userRepository;
   AuthentificationCubit({this.userRepository})
       : super(AuthentificationStatus.unknown);
   Future<void> appStarted() async {
     try {
-      final hasInfo = await userRepository.hasInfo();
-      if (hasInfo) {
+      final hasInfo = await userRepository?.hasInfo();
+      if (hasInfo != null && hasInfo) {
         emit(AuthentificationStatus.authentificated);
       } else {
         emit(AuthentificationStatus.unauthentificated);
       }
     } catch (e) {
-      await userRepository.deleteInfo();
+      await userRepository?.deleteInfo();
       emit(AuthentificationStatus.unauthentificated);
     }
   }
 
   Future<void> loggedIn(User user) async {
     try {
-      await userRepository.persistInfo(user);
+      await userRepository?.persistInfo(user);
       emit(AuthentificationStatus.authentificated);
     } catch (e) {}
   }
 
   Future<void> loggedOut() async {
     try {
-      await userRepository.deleteInfo();
+      await userRepository?.deleteInfo();
       emit(AuthentificationStatus.unauthentificated);
     } catch (e) {}
   }
